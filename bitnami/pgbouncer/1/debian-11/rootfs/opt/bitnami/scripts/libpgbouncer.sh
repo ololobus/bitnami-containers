@@ -179,13 +179,14 @@ pgbouncer_initialize() {
 
     pgbouncer_copy_mounted_config
 
-    info "Waiting for PostgreSQL backend to be accessible"
-    if ! retry_while "wait-for-port --host $POSTGRESQL_HOST $POSTGRESQL_PORT" "$PGBOUNCER_INIT_SLEEP_TIME" "$PGBOUNCER_INIT_MAX_RETRIES"; then
-        error "Backend $POSTGRESQL_HOST not accessible"
-        exit 1
-    else
-        info "Backend $POSTGRESQL_HOST:$POSTGRESQL_PORT accessible"
-    fi
+    info "Starting without waiting for PostgreSQL backend to be accessible"
+    # info "Waiting for PostgreSQL backend to be accessible"
+    # if ! retry_while "wait-for-port --host $POSTGRESQL_HOST $POSTGRESQL_PORT" "$PGBOUNCER_INIT_SLEEP_TIME" "$PGBOUNCER_INIT_MAX_RETRIES"; then
+    #     error "Backend $POSTGRESQL_HOST not accessible"
+    #     exit 1
+    # else
+    #     info "Backend $POSTGRESQL_HOST:$POSTGRESQL_PORT accessible"
+    # fi
 
     info "Configuring credentials"
     # Create credentials file
